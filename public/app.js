@@ -232,7 +232,8 @@ async function connectToNewUser(userId, userName) {
 // Socket event handlers
 socket.on('user-connected', async ({ userId, userName }) => {
     console.log('User connected:', userName);
-    // Wait for offer from new user
+    // Existing users should connect to the new user
+    await connectToNewUser(userId, userName);
 });
 
 socket.on('offer', async ({ offer, from, userName }) => {
